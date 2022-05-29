@@ -81,10 +81,6 @@ button {
   background-color: rgb(235, 145, 0);
 }
 
-.operator:active {
-  background-color: rgb(255, 165, 0);
-}
-
 .remove {
   color: rgb(255, 255, 255);
   background-color: rgb(138, 0, 0);
@@ -92,10 +88,6 @@ button {
 
 .remove:hover {
   background-color: rgb(118, 0, 0);
-}
-
-.remove:active {
-  background-color: rgb(138, 0, 0);
 }
 
 .number {
@@ -107,10 +99,6 @@ button {
   background-color: rgb(36, 36, 36);
 }
 
-.number:active {
-  background-color: rgb(56, 56, 56);
-}
-
 .qol {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
@@ -118,10 +106,6 @@ button {
 
 .qol:hover {
   background-color: rgb(235, 235, 235);
-}
-
-.qol:active {
-  background-color: rgb(255, 255, 255);
 }
 
 .operator:active,
