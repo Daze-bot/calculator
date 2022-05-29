@@ -3,13 +3,6 @@
   src: url(./fonts/digital-7.regular.ttf);
 }
 
-body,
-div {
-  border: 1px;
-  border-style: solid;
-  border-color: red;
-}
-
 body {
   text-align: center;
   min-width: 300px;
@@ -21,11 +14,14 @@ body {
   margin: auto;
   display: flex;
   flex-direction: column;
+  background-color: rgb(20, 20, 20);
+  border-radius: 8px;
 }
 
 .title {
   margin: 14px 14px 0 14px;
   font-size: 32px;
+  color: white;
 }
 
 .display {
@@ -35,6 +31,8 @@ body {
   display: flex;
   justify-content: right;
   align-items: center;
+  background-color: rgb(217, 233, 212);
+  border-radius: 8px;
 }
 
 .output {
@@ -55,10 +53,35 @@ body {
   margin-bottom: 14px;
   padding-left: 5px;
   padding-right: 5px;
+  background-color: rgb(231, 231, 231);
+  border-radius: 8px;
 }
 
 button {
   height: 55px;
   width: 55px;
   padding: 0;
+  font-size: 18px;
+  border: 1px;
+  border-style: solid;
+  border-radius: 4px;
+}
+
+.number,
+.operator {
+  font-size: 24px;
+}
+
+.operator {
+  background-color: rgb(255, 165, 0);
+}
+
+.remove {
+  color: rgb(255, 255, 255);
+  background-color: rgb(138, 0, 0);
+}
+
+.number {
+  background-color: rgb(56, 56, 56);
+  color: rgb(255, 255, 255);
 }
