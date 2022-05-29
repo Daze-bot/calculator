@@ -72,8 +72,20 @@ button {
   font-size: 24px;
 }
 
+.operator:active,
+.remove:active,
+.number:active,
+.qol:active {
+  transform: translateY(2px);
+}
+
 .operator {
   background-color: rgb(255, 165, 0);
+  color: black;
+}
+
+.operator:hover {
+  background-color: rgb(235, 145, 0);
 }
 
 .remove {
@@ -81,7 +93,24 @@ button {
   background-color: rgb(138, 0, 0);
 }
 
+.remove:hover {
+  background-color: rgb(118, 0, 0);
+}
+
 .number {
   background-color: rgb(56, 56, 56);
   color: rgb(255, 255, 255);
+}
+
+.number:hover {
+  background-color: rgb(36, 36, 36);
+}
+
+.qol {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.qol:hover {
+  background-color: rgb(235, 235, 235);
 }
