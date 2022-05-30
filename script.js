@@ -9,22 +9,26 @@ let subtractBtn = document.querySelector('#subtract');
 let addBtn = document.querySelector('#add');
 let equalsBtn = document.querySelector('#equals');
 let decimalPointBtn = document.querySelector('#decimal');
-let zeroBtn = document.querySelector('#zero');
-let oneBtn = document.querySelector('#one');
-let twoBtn = document.querySelector('#two');
-let threeBtn = document.querySelector('#three');
-let fourBtn = document.querySelector('#four');
-let fiveBtn = document.querySelector('#five');
-let sixBtn = document.querySelector('#six');
-let sevenBtn = document.querySelector('#seven');
-let eightBtn = document.querySelector('#eight');
-let nineBtn = document.querySelector('#nine');
+let numberBtn = document.querySelectorAll('.number');
 
-clearBtn.addEventListener('click', () => output.textContent = "0");
+clearBtn.addEventListener('click', clearAll);
 deleteBtn.addEventListener('click', removeLast);
 signChangeBtn.addEventListener('click', changeSign);
 percentageBtn.addEventListener('click', toPercent);
 decimalPointBtn.addEventListener('click', addDecimal);
+
+numberBtn.forEach(btn => {
+  btn.addEventListener('click', () => appendNumber(btn.textContent))
+});
+
+function appendNumber(number) {
+  if (output.textContent === "0") {
+    output.textContent = number;
+  } else {
+    output.textContent += number;
+    output.textContent = output.textContent.substring(0, 11);
+  }
+}
 
 function addDecimal() {
   if (output.textContent.includes(".")) {
@@ -45,8 +49,6 @@ function toPercent() {
     let fullSecondPart = `e${secondPart}`;
     let fullFirstPart = firstPart.substring(0, 7);
     output.textContent = `${fullFirstPart}${fullSecondPart}`;
-  } else if (str === "NaN") {
-    output.textContent = "Too Small";
   } else {
     output.textContent = str.substring(0, 11);
   }
@@ -66,4 +68,8 @@ function removeLast() {
   } else {
     output.textContent = str;
   }
+}
+
+function clearAll() {
+  output.textContent = "0";
 }
