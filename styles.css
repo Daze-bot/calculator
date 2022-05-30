@@ -38,8 +38,8 @@ body {
 .output {
   font-family: 'digital-clock-font';
   margin-right: 6px;
-  margin-bottom: 16px;
-  font-size: 64px;
+  margin-bottom: 10px;
+  font-size: 48px;
 }
 
 .buttons {
