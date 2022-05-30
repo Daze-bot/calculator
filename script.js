@@ -12,12 +12,6 @@ let decimalPointBtn = document.querySelector('#decimal');
 let numberBtn = document.querySelectorAll('.number');
 let hiddenValue = document.querySelector('#hidden');
 
-let operation = {
-  firstOp: 0,
-  secondOp: 0,
-  operator: null,
-}
-
 clearBtn.addEventListener('click', clearAll);
 deleteBtn.addEventListener('click', removeLast);
 signChangeBtn.addEventListener('click', changeSign);
@@ -27,9 +21,46 @@ numberBtn.forEach(btn => {
   btn.addEventListener('click', () => appendNumber(btn.textContent))
 });
 addBtn.addEventListener('click', addNumbers);
-equalsBtn.addEventListener('click', evaluate);
+subtractBtn.addEventListener('click', subtractNumbers);
+multiplyBtn.addEventListener('click', multiplyNumbers);
+divideBtn.addEventListener('click', divideNumbers);
+equalsBtn.addEventListener('click', evaluateNumbers);
 
+let evaluationTotal;
 
+let operation = {
+  firstOp: 0,
+  secondOp: 0,
+  operator: null,
+}
+function evaluateNumbers() {
+  evaluate();
+  operation.operator = null;
+}
+
+function divideNumbers() {
+  if (operation.operator !== null) {
+    evaluate();
+  }
+  operation.operator = "/";
+  operation.firstOp = +output.textContent;
+}
+
+function multiplyNumbers() {
+  if (operation.operator !== null) {
+    evaluate();
+  }
+  operation.operator = "*";
+  operation.firstOp = +output.textContent;
+}
+
+function subtractNumbers() {
+  if (operation.operator !== null) {
+    evaluate();
+  }
+  operation.operator = "-";
+  operation.firstOp = +output.textContent;
+}
 
 function addNumbers() {
   if (operation.operator !== null) {
@@ -39,7 +70,16 @@ function addNumbers() {
   operation.firstOp = +output.textContent;
 }
 
-function evaluate();
+function evaluate() {
+  if (operation.operator === null) {
+    return
+  } else {
+    operation.secondOp = +output.textContent;
+    let display = operate(operation.operator, operation.firstOp, operation.secondOp);
+    roundCalc(display);
+    evaluationTotal = output.textContent;
+  } 
+}
 
 function operate(currentOperator, a, b) {
   a = +a;
@@ -49,35 +89,20 @@ function operate(currentOperator, a, b) {
       if (b === 0) {
         return "Nice Try!";
       } else {
-        return divide(a, b);
+        return a / b;
       }
     case "*":
-      return multiply(a, b);
+      return a * b;
     case "-":
-      return subtract(a, b);
+      return a - b;
     case "+":
-      return add(a, b);
+      return a + b;
   }
 }
 
-function divide(a, b) {
-  return a / b;
-}
-
-function multiply(a, b) {
-  return a * b;
-}
-
-function subtract(a, b) {
-  return a - b;
-}
-
-function add(a, b) {
-  return a + b;
-}
-
 function appendNumber(number) {
-  if (output.textContent === "0") {
+  if (output.textContent === "0" || output.textContent == operation.firstOp ||
+      output.textContent == evaluationTotal) {
     output.textContent = number;
   } else {
     output.textContent += number;
@@ -95,18 +120,8 @@ function addDecimal() {
 
 function toPercent() {
   let display = +output.textContent;
-  let newDisplay = display / 100;
-  let str = newDisplay.toString();
-  if (str.includes("e")) {
-    let newStr = str.split("e");
-    let firstPart = newStr[0];
-    let secondPart = newStr[1];
-    let fullSecondPart = `e${secondPart}`;
-    let fullFirstPart = firstPart.substring(0, 7);
-    output.textContent = `${fullFirstPart}${fullSecondPart}`;
-  } else {
-    output.textContent = str.substring(0, 11);
-  }
+  display = display / 100;
+  roundCalc(display);
 }
 
 function changeSign() {
@@ -127,8 +142,21 @@ function removeLast() {
 
 function clearAll() {
   output.textContent = "0";
-  hiddenValue.textContent = "";
   operation.firstOp = 0;
   operation.secondOp = 0;
   operation.operator = null;
+}
+
+function roundCalc(display) {
+  let str = display.toString();
+  if (str.includes("e")) {
+    let newStr = str.split("e");
+    let firstPart = newStr[0];
+    let secondPart = newStr[1];
+    let fullSecondPart = `e${secondPart}`;
+    let fullFirstPart = firstPart.substring(0, 7);
+    output.textContent = `${fullFirstPart}${fullSecondPart}`;
+  } else {
+    output.textContent = str.substring(0, 11);
+  }
 }
