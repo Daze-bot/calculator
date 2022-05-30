@@ -6,6 +6,7 @@
 body {
   text-align: center;
   min-width: 300px;
+  padding-top: 50px;
 }
 
 .container {
@@ -117,4 +118,8 @@ button {
 .decimal:active,
 .qol:active {
   transform: translateY(2px);
+}
+
+#hidden {
+  display: none;
 }

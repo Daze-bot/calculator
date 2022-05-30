@@ -10,16 +10,71 @@ let addBtn = document.querySelector('#add');
 let equalsBtn = document.querySelector('#equals');
 let decimalPointBtn = document.querySelector('#decimal');
 let numberBtn = document.querySelectorAll('.number');
+let hiddenValue = document.querySelector('#hidden');
+
+let operation = {
+  firstOp: 0,
+  secondOp: 0,
+  operator: null,
+}
 
 clearBtn.addEventListener('click', clearAll);
 deleteBtn.addEventListener('click', removeLast);
 signChangeBtn.addEventListener('click', changeSign);
 percentageBtn.addEventListener('click', toPercent);
 decimalPointBtn.addEventListener('click', addDecimal);
-
 numberBtn.forEach(btn => {
   btn.addEventListener('click', () => appendNumber(btn.textContent))
 });
+addBtn.addEventListener('click', addNumbers);
+equalsBtn.addEventListener('click', evaluate);
+
+
+
+function addNumbers() {
+  if (operation.operator !== null) {
+    evaluate();
+  }
+  operation.operator = "+";
+  operation.firstOp = +output.textContent;
+}
+
+function evaluate();
+
+function operate(currentOperator, a, b) {
+  a = +a;
+  b = +b;
+  switch (currentOperator) {
+    case "/":
+      if (b === 0) {
+        return "Nice Try!";
+      } else {
+        return divide(a, b);
+      }
+    case "*":
+      return multiply(a, b);
+    case "-":
+      return subtract(a, b);
+    case "+":
+      return add(a, b);
+  }
+}
+
+function divide(a, b) {
+  return a / b;
+}
+
+function multiply(a, b) {
+  return a * b;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+
+function add(a, b) {
+  return a + b;
+}
 
 function appendNumber(number) {
   if (output.textContent === "0") {
@@ -72,4 +127,8 @@ function removeLast() {
 
 function clearAll() {
   output.textContent = "0";
+  hiddenValue.textContent = "";
+  operation.firstOp = 0;
+  operation.secondOp = 0;
+  operation.operator = null;
 }
