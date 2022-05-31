@@ -117,7 +117,7 @@ function appendNumber(number) {
 }
 
 function addDecimal() {
-  if (output.textContent.includes(".")) {
+  if (output.textContent.includes(".") || resetValue.textContent === "yes") {
     output.textContent = output.textContent;
   } else {
     output.textContent += ".";
