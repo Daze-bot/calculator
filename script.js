@@ -33,6 +33,7 @@ let operation = {
   secondOp: 0,
   operator: null,
 }
+
 function evaluateNumbers() {
   if (resetValue.textContent === "no") {
     evaluate();
