@@ -139,13 +139,15 @@ function changeSign() {
 }
 
 function removeLast() {
-  let display = output.textContent;
-  let str = display.slice(0, -1);
-  if (str === "") {
-    output.textContent = "0";
-    resetValue.textContent = "yes";
-  } else {
-    output.textContent = str;
+  if (resetValue.textContent === "no") {
+    let display = output.textContent;
+    let str = display.slice(0, -1);
+    if (str === "") {
+      output.textContent = "0";
+      resetValue.textContent = "yes";
+    } else {
+      output.textContent = str;
+    }
   }
 }
 
