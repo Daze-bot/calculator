@@ -10,7 +10,7 @@ let addBtn = document.querySelector('#add');
 let equalsBtn = document.querySelector('#equals');
 let decimalPointBtn = document.querySelector('#decimal');
 let numberBtn = document.querySelectorAll('.number');
-let hiddenValue = document.querySelector('#hidden');
+let resetValue = document.querySelector('#hidden');
 
 clearBtn.addEventListener('click', clearAll);
 deleteBtn.addEventListener('click', removeLast);
@@ -26,7 +26,7 @@ multiplyBtn.addEventListener('click', multiplyNumbers);
 divideBtn.addEventListener('click', divideNumbers);
 equalsBtn.addEventListener('click', evaluateNumbers);
 
-let evaluationTotal;
+resetValue.textContent = "yes";
 
 let operation = {
   firstOp: 0,
@@ -34,8 +34,10 @@ let operation = {
   operator: null,
 }
 function evaluateNumbers() {
-  evaluate();
-  operation.operator = null;
+  if (resetValue.textContent === "no") {
+    evaluate();
+    operation.operator = null;
+  }
 }
 
 function divideNumbers() {
@@ -44,6 +46,7 @@ function divideNumbers() {
   }
   operation.operator = "/";
   operation.firstOp = +output.textContent;
+  resetValue.textContent = "yes";
 }
 
 function multiplyNumbers() {
@@ -52,6 +55,7 @@ function multiplyNumbers() {
   }
   operation.operator = "*";
   operation.firstOp = +output.textContent;
+  resetValue.textContent = "yes";
 }
 
 function subtractNumbers() {
@@ -60,6 +64,7 @@ function subtractNumbers() {
   }
   operation.operator = "-";
   operation.firstOp = +output.textContent;
+  resetValue.textContent = "yes";
 }
 
 function addNumbers() {
@@ -68,16 +73,17 @@ function addNumbers() {
   }
   operation.operator = "+";
   operation.firstOp = +output.textContent;
+  resetValue.textContent = "yes";
 }
 
 function evaluate() {
-  if (operation.operator === null) {
+  if (operation.operator === null || resetValue.textContent === "yes") {
     return
   } else {
     operation.secondOp = +output.textContent;
     let display = operate(operation.operator, operation.firstOp, operation.secondOp);
     roundCalc(display);
-    evaluationTotal = output.textContent;
+    resetValue.textContent = "yes";
   } 
 }
 
@@ -101,9 +107,9 @@ function operate(currentOperator, a, b) {
 }
 
 function appendNumber(number) {
-  if (output.textContent === "0" || output.textContent == operation.firstOp ||
-      output.textContent == evaluationTotal) {
+  if (resetValue.textContent === "yes") {
     output.textContent = number;
+    resetValue.textContent = "no";
   } else {
     output.textContent += number;
     output.textContent = output.textContent.substring(0, 11);
@@ -125,9 +131,11 @@ function toPercent() {
 }
 
 function changeSign() {
-  let display = +output.textContent;
-  display *= -1;
-  output.textContent = display;
+  if (resetValue.textContent === "no") {
+    let display = +output.textContent;
+    display *= -1;
+    output.textContent = display;
+  }
 }
 
 function removeLast() {
@@ -135,6 +143,7 @@ function removeLast() {
   let str = display.slice(0, -1);
   if (str === "") {
     output.textContent = "0";
+    resetValue.textContent = "yes";
   } else {
     output.textContent = str;
   }
@@ -145,6 +154,7 @@ function clearAll() {
   operation.firstOp = 0;
   operation.secondOp = 0;
   operation.operator = null;
+  resetValue.textContent = "yes";
 }
 
 function roundCalc(display) {
