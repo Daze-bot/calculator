@@ -20,10 +20,10 @@ decimalPointBtn.addEventListener('click', addDecimal);
 numberBtn.forEach(btn => {
   btn.addEventListener('click', () => appendNumber(btn.textContent))
 });
-addBtn.addEventListener('click', addNumbers);
-subtractBtn.addEventListener('click', subtractNumbers);
-multiplyBtn.addEventListener('click', multiplyNumbers);
-divideBtn.addEventListener('click', divideNumbers);
+addBtn.addEventListener('click', () => doMath("+"));
+subtractBtn.addEventListener('click', () => doMath("-"));
+multiplyBtn.addEventListener('click', () => doMath("*"));
+divideBtn.addEventListener('click', () => doMath("/"));
 equalsBtn.addEventListener('click', evaluateNumbers);
 
 resetValue.textContent = "yes";
@@ -41,38 +41,11 @@ function evaluateNumbers() {
   }
 }
 
-function divideNumbers() {
+function doMath(inputOp) {
   if (operation.operator !== null) {
     evaluate();
   }
-  operation.operator = "/";
-  operation.firstOp = +output.textContent;
-  resetValue.textContent = "yes";
-}
-
-function multiplyNumbers() {
-  if (operation.operator !== null) {
-    evaluate();
-  }
-  operation.operator = "*";
-  operation.firstOp = +output.textContent;
-  resetValue.textContent = "yes";
-}
-
-function subtractNumbers() {
-  if (operation.operator !== null) {
-    evaluate();
-  }
-  operation.operator = "-";
-  operation.firstOp = +output.textContent;
-  resetValue.textContent = "yes";
-}
-
-function addNumbers() {
-  if (operation.operator !== null) {
-    evaluate();
-  }
-  operation.operator = "+";
+  operation.operator = inputOp;
   operation.firstOp = +output.textContent;
   resetValue.textContent = "yes";
 }
