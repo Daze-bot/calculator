@@ -1,5 +1,5 @@
 # calculator
-Fully functional, basic calculator. For use on a web browser!
+Fully functional, basic calculator. Intended for use on a web browser!
 
 This calculator was created using HTML, CSS, and JavaScript as part of The Odin
 Project full stack JavaScript curriculum.
